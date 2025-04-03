@@ -1,7 +1,7 @@
 const addButton = document.querySelector("#add-button")
 const sidebar = document.querySelector(".sidebar");
 const main = document.querySelector("main");
-const closeButton = document.querySelector(".closebtn");
+const closeButton = document.querySelector(".close-btn");
 const submit = document.querySelector("#submit-button");
 const cards = document.querySelector(".cards");
 const myLibrary = [];
@@ -16,11 +16,10 @@ function Book(title, author, pages, read, id) {
 
 
 
-
+//------Delegates-----//
 addButton.addEventListener("click", openSidebar)
 closeButton.addEventListener("click", closeSidebar)
 submit.addEventListener("click", submitNewBook);
-
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("read-button")) {
         changeCardRead(e);
@@ -31,15 +30,12 @@ document.addEventListener("click", (e) => {
         removeBookFromArray(id.innerText);
         removeBookFromUI(bookCard);
     }
-
-
 })
 
 
+//------Add-Remove------//
+
 function addBookToArr(title, author, pages, read, id) {
-
-
-
     const book = new Book(title, author, pages, read, id);
     myLibrary.push(book);
 }
@@ -61,10 +57,28 @@ function removeBookFromUI(bookCard) {
     bookCard.remove();
 }
 
+function submitNewBook(event) {
+    const title = document.querySelector("#newTitle").value;
+    const author = document.querySelector("#newAuthor").value;
+    const page = document.querySelector("#newPage").value;
+    const read = document.querySelector("#read").value;
+    const id = crypto.randomUUID();
+    if (!title || !author || page < 0 || !read) return;
+    if (!(isBookExists(title))) {
+        addBookToArr(title, author, page, read, id);
+        createBookCard(title, author, page, read, id)
+        clearForm(title, author, page, read);
 
+    }
+
+    event.preventDefault();
+}
+
+function clearForm() {
+    const submitForm = document.querySelector("form");
+    submitForm.reset();
+}
 //**** Book Card ****//
-
-
 
 function createBookCard(title, author, pages, read, id) {
 
@@ -87,8 +101,6 @@ function createBookCard(title, author, pages, read, id) {
     cardAuthor.classList.add("book-card-textfield");
     card.appendChild(cardAuthor);
 
-
-
     const cardPages = document.createElement("div");
     cardPages.innerText = pages;
     cardPages.classList.add("book-card-textfield");
@@ -109,7 +121,6 @@ function createBookCard(title, author, pages, read, id) {
     cardRead.classList.add("read-button");
 
 
-
     const cardRemove = document.createElement("button");
     cardRemove.innerText = "×";
     cardRemove.classList.add("remove-button");
@@ -117,21 +128,6 @@ function createBookCard(title, author, pages, read, id) {
 
 }
 
-function submitNewBook(event) {
-    const title = document.querySelector("#newTitle").value;
-    const author = document.querySelector("#newAuthor").value;
-    const page = document.querySelector("#newPage").value;
-    const read = document.querySelector("#read").value;
-    const id = crypto.randomUUID();
-    if (!title || !author || page < 0 || !read) return;
-    if (!(isBookExists(title))) {
-        addBookToArr(title, author, page, read, id);
-        createBookCard(title, author, page, read, id)
-
-    }
-
-    event.preventDefault();
-}
 
 function changeCardRead(event) {
     if (event.target.innerText === "Read") {

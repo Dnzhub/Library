@@ -136,7 +136,7 @@ button {
     transition: 0.3s;
 }
 
-.closebtn {
+.close-btn {
     position: absolute;
     top: 0;
     right: 25px;
