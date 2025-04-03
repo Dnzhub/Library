@@ -5,11 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="app.css">
 </head>
 
 <body>
+    <aside class="sidebar">
+        <a href="#" class="closebtn">×</a>
+        <form action="#">
+            <section>
+                <h2>New Book</h2>
+                <div>
+                    <label for="newTitle">Title</label>
+                    <input type="text" id="newTitle" name="booktitle" minlength="2" maxlength="26" required>
+                </div>
+                <div>
+                    <label for="newAuthor">Author</label>
+                    <input type="text" id="newAuthor" name="bookauthor" minlength="2" maxlength="26" required>
+                </div>
+                <div>
+                    <label for="newPage">Pages</label>
+                    <input type="number" id="newPage" name="bookPage" min="0" required>
+                </div>
 
+
+                <div>
+                    <label for="read">Have you read it?</label>
+                    <select name="read" id="read">
+                        <option value="Read" selected>Read</option>
+                        <option value="Not Read">Not Read</option>
+                    </select>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <button type="submit" id="submit-button">Add new book</button>
+                </div>
+            </section>
+
+        </form>
+    </aside>
+    <main>
+        <nav>
+            <h1>Library</h1>
+            <a href="#">GitHub</a>
+        </nav>
+        <button id="add-button">Add Book</button>
+        <section class="cards">
+
+        </section>
+    </main>
     <script src="app.js"></script>
 </body>
 
