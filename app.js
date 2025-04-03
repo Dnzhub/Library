@@ -6,22 +6,12 @@ const submit = document.querySelector("#submit-button");
 const cards = document.querySelector(".cards");
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = crypto.randomUUID();
-}
-function addBookToArr(title, author, pages, read) {
-    if (myLibrary.some((book) => book.title.toLowerCase() === title.toLowerCase())) {
-        alert("This book is already exists in library!");
-        return;
-    }
-
-
-    const book = new Book(title, author, pages, read);
-    myLibrary.push(book);
+    this.id = id;
 }
 
 
@@ -45,6 +35,23 @@ document.addEventListener("click", (e) => {
 
 })
 
+
+function addBookToArr(title, author, pages, read, id) {
+
+
+
+    const book = new Book(title, author, pages, read, id);
+    myLibrary.push(book);
+}
+
+function isBookExists(title) {
+    if (myLibrary.some((book) => book.title.toLowerCase() === title.toLowerCase())) {
+        alert("This book is already exists in library!");
+        return true;
+    }
+    return false;
+}
+
 function removeBookFromArray(id) {
     myLibrary.splice(myLibrary.findIndex(item => item.id === id), 1);
     console.log(myLibrary);
@@ -56,22 +63,11 @@ function removeBookFromUI(bookCard) {
 
 
 //**** Book Card ****//
-function showBooks() {
 
-    myLibrary.forEach((item) => {
 
-        createBookCard(item.title, item.author, item.pages, item.read, item.id)
-    });
-
-}
-
-function clearBookCardDisplays() {
-    while (cards.firstChild) {
-        cards.removeChild(cards.firstChild);
-    }
-}
 
 function createBookCard(title, author, pages, read, id) {
+
     const card = document.createElement("div");
     card.classList.add("book-card");
     cards.appendChild(card);
@@ -126,10 +122,14 @@ function submitNewBook(event) {
     const author = document.querySelector("#newAuthor").value;
     const page = document.querySelector("#newPage").value;
     const read = document.querySelector("#read").value;
+    const id = crypto.randomUUID();
     if (!title || !author || page < 0 || !read) return;
-    clearBookCardDisplays();
-    addBookToArr(title, author, page, read);
-    showBooks();
+    if (!(isBookExists(title))) {
+        addBookToArr(title, author, page, read, id);
+        createBookCard(title, author, page, read, id)
+
+    }
+
     event.preventDefault();
 }
 
@@ -161,6 +161,3 @@ function closeSidebar() {
     main.style.marginLeft = "0";
 }
 
-
-addBookToArr("title", "author", 3, "read");
-showBooks();
