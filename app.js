@@ -1,6 +1,3 @@
-const MIN_INPUT_LENGTH = 3;
-const MAX_INPUT_LENGTH = 24;
-
 const addButton = document.querySelector("#add-button")
 const sidebar = document.querySelector(".sidebar");
 const main = document.querySelector("main");
@@ -25,9 +22,13 @@ addButton.addEventListener("click", openSidebar)
 closeButton.addEventListener("click", closeSidebar)
 bookForm.addEventListener("submit", submitNewBook);
 document.addEventListener("click", (e) => {
+    //Get clicked card elements
+
+    //Read - Not Read toggle 
     if (e.target.classList.contains("read-button")) {
         changeCardRead(e);
     }
+    //Remove card
     if (e.target.classList.contains("remove-button")) {
         const bookCard = e.target.closest('.book-card');
         const id = bookCard.querySelector('p');
@@ -36,20 +37,7 @@ document.addEventListener("click", (e) => {
     }
 })
 
-function checkBookFormValidation() {
-    const inputs = bookForm.querySelectorAll('input');
 
-    // Check if all inputs are valid
-    const allValid = Array.from(inputs).every(input => input.checkValidity());
-
-    if (allValid) {
-        return true
-
-    } else {
-        return false;
-    }
-
-}
 //------Add-Remove------//
 
 function addBookToArr(title, author, pages, read, id) {
@@ -57,13 +45,6 @@ function addBookToArr(title, author, pages, read, id) {
     myLibrary.push(book);
 }
 
-function isBookExists(title) {
-    if (myLibrary.some((book) => book.title.toLowerCase() === title.toLowerCase())) {
-        alert("This book is already exists in library!");
-        return true;
-    }
-    return false;
-}
 
 function removeBookFromArray(id) {
     myLibrary.splice(myLibrary.findIndex(item => item.id === id), 1);
@@ -89,19 +70,14 @@ function submitNewBook(event) {
         clearForm(title, author, page, read);
 
     }
-
 }
-
-
-
-
 
 function clearForm() {
     const submitForm = document.querySelector("form");
     submitForm.reset();
 }
-//**** Book Card ****//
 
+//**** Book Card ****//
 function createBookCard(title, author, pages, read, id) {
 
     const card = document.createElement("div");
@@ -164,7 +140,6 @@ function changeCardRead(event) {
     }
 }
 
-//******************//
 
 
 
@@ -178,4 +153,22 @@ function closeSidebar() {
     sidebar.style.width = "0";
     main.style.marginLeft = "0";
 }
+function isBookExists(title) {
+    if (myLibrary.some((book) => book.title.toLowerCase() === title.toLowerCase())) {
+        alert("This book is already exists in library!");
+        return true;
+    }
+    return false;
+}
 
+function checkBookFormValidation() {
+    const inputs = bookForm.querySelectorAll('input');
+
+    // Check if all inputs are valid
+    const allValid = Array.from(inputs).every(input => input.checkValidity());
+
+    if (allValid) return true
+    else return false;
+
+
+}

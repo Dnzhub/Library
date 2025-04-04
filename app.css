@@ -160,6 +160,12 @@ nav {
 
 }
 
+a {
+    text-decoration: none;
+    color: white;
+
+}
+
 form section {
     display: flex;
     flex-direction: column;
@@ -172,6 +178,7 @@ form section div {
     flex-direction: column;
     margin-top: 15px;
 }
+
 
 
 input {
