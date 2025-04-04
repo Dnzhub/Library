@@ -124,7 +124,8 @@ button {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-    background-color: rgb(224, 224, 224);
+    background-color: #FFD460;
+    color: #2D4059;
 }
 
 .sidebar a {
@@ -152,7 +153,7 @@ main {
 nav {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(63, 62, 62);
+    background-color: #2D4059;
     color: white;
     padding: 20px;
     letter-spacing: -0.05rem;
@@ -194,7 +195,7 @@ label {
 
 
 input:valid {
-    border: 1px solid green;
+    border: 2px solid green;
 
 }
 
@@ -205,7 +206,7 @@ input:valid {
     align-self: center;
     padding: 5px 30px;
     border-radius: 15px;
-    background-color: rgb(63, 62, 62);
+    background-color: #2D4059;
     color: white;
     font-size: 1.2rem;
     margin: 50px 0px;
@@ -219,12 +220,13 @@ input:valid {
 }
 
 #add-button:hover {
-    background-color: rgb(95, 95, 95);
+    background-color: #445e80;
 
 }
 
 #add-button:active {
-    background-color: rgb(70, 70, 70);
+    background-color: #3d4d63;
+    ;
 
 }
 
@@ -284,8 +286,8 @@ input:valid {
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    background-color: white;
-    color: black;
+    background-color: #2D4059;
+    color: white;
     font-size: 1.2rem;
     border: 3px solid rgba(209, 208, 208, 0.5);
     border-radius: 10px;

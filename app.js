@@ -1,10 +1,14 @@
+const MIN_INPUT_LENGTH = 3;
+const MAX_INPUT_LENGTH = 24;
+
 const addButton = document.querySelector("#add-button")
 const sidebar = document.querySelector(".sidebar");
 const main = document.querySelector("main");
 const closeButton = document.querySelector(".close-btn");
-const submit = document.querySelector("#submit-button");
 const cards = document.querySelector(".cards");
+const bookForm = document.querySelector("#book-form");
 const myLibrary = [];
+let isFormValid = false;
 
 function Book(title, author, pages, read, id) {
     this.title = title;
@@ -19,7 +23,7 @@ function Book(title, author, pages, read, id) {
 //------Delegates-----//
 addButton.addEventListener("click", openSidebar)
 closeButton.addEventListener("click", closeSidebar)
-submit.addEventListener("click", submitNewBook);
+bookForm.addEventListener("submit", submitNewBook);
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("read-button")) {
         changeCardRead(e);
@@ -32,7 +36,20 @@ document.addEventListener("click", (e) => {
     }
 })
 
+function checkBookFormValidation() {
+    const inputs = bookForm.querySelectorAll('input');
 
+    // Check if all inputs are valid
+    const allValid = Array.from(inputs).every(input => input.checkValidity());
+
+    if (allValid) {
+        return true
+
+    } else {
+        return false;
+    }
+
+}
 //------Add-Remove------//
 
 function addBookToArr(title, author, pages, read, id) {
@@ -58,12 +75,14 @@ function removeBookFromUI(bookCard) {
 }
 
 function submitNewBook(event) {
+    event.preventDefault();
     const title = document.querySelector("#newTitle").value;
     const author = document.querySelector("#newAuthor").value;
     const page = document.querySelector("#newPage").value;
     const read = document.querySelector("#read").value;
     const id = crypto.randomUUID();
-    if (!title || !author || page < 0 || !read) return;
+
+    checkBookFormValidation();
     if (!(isBookExists(title))) {
         addBookToArr(title, author, page, read, id);
         createBookCard(title, author, page, read, id)
@@ -71,8 +90,11 @@ function submitNewBook(event) {
 
     }
 
-    event.preventDefault();
 }
+
+
+
+
 
 function clearForm() {
     const submitForm = document.querySelector("form");
