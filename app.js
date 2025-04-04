@@ -48,7 +48,6 @@ function addBookToArr(title, author, pages, read, id) {
 
 function removeBookFromArray(id) {
     myLibrary.splice(myLibrary.findIndex(item => item.id === id), 1);
-    console.log(myLibrary);
 }
 
 function removeBookFromUI(bookCard) {
@@ -122,12 +121,15 @@ function createBookCard(title, author, pages, read, id) {
     const cardRemove = document.createElement("button");
     cardRemove.innerText = "×";
     cardRemove.classList.add("remove-button");
-    card.appendChild(cardRemove)
+    card.appendChild(cardRemove);
 
 }
 
 
 function changeCardRead(event) {
+
+
+
     if (event.target.innerText === "Read") {
         event.target.classList.remove("btn-success");
         event.target.classList.add("btn-danger");
@@ -138,6 +140,17 @@ function changeCardRead(event) {
         event.target.classList.add("btn-success");
         event.target.innerText = "Read"
     }
+
+    //Change read status on array
+    const bookCard = event.target.closest('.book-card');
+    const id = bookCard.querySelector('p');
+    myLibrary.forEach(item => {
+
+        if (item.id === id.innerText) {
+            item.read = event.target.innerText;
+            console.log(item);
+        }
+    });
 }
 
 
