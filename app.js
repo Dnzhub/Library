@@ -148,7 +148,6 @@ function changeCardRead(event) {
 
         if (item.id === id.innerText) {
             item.read = event.target.innerText;
-            console.log(item);
         }
     });
 }
