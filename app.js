@@ -13,9 +13,9 @@ class Library {
         this.#cacheDOMElements();
         this.#setupEventListeners();
     }
-    static createNewBook(title, author, pages, read, id) {
-        return new Book(title, author, pages, read, id);
-    }
+    // static createNewBook(title, author, pages, read, id) {
+    //     return new Book(title, author, pages, read, id);
+    // }
     #cacheDOMElements() {
         this.#elements = {
             addButton: document.querySelector("#add-button"),
